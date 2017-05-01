@@ -38,7 +38,7 @@
 <body>
 <div id="box">
     <div>
-        <h1 class="text">welcome to ellibrary</h1>
+        <h1 class="text">Hello! welcome to ellibrary</h1>
     </div>
     <div class="inner">
         <%--<p><a href="<c:url value='/book'/>">books</a></p>--%>
