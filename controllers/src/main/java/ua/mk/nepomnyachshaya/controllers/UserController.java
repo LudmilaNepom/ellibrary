@@ -15,16 +15,17 @@ public class UserController {
         System.out.println("method is working");
         return new ModelAndView("index");
     }
-    @RequestMapping(value = "/author", method = RequestMethod.GET)
-    public ModelAndView getAuthors() {
-        return new ModelAndView("author");
-    }
-    @RequestMapping(value = "/book", method = RequestMethod.GET)
-    public ModelAndView getBooks() {
-        return new ModelAndView("book");
-    }
-    @RequestMapping(value = "/category", method = RequestMethod.GET)
-    public ModelAndView getCategories() {
-        return new ModelAndView("category");
-    }
+
+//    @RequestMapping(value = "/author", method = RequestMethod.GET)
+//    public ModelAndView getAuthors() {
+//        return new ModelAndView("author");
+//    }
+//    @RequestMapping(value = "/book", method = RequestMethod.GET)
+//    public ModelAndView getBooks() {
+//        return new ModelAndView("book");
+//    }
+//    @RequestMapping(value = "/category", method = RequestMethod.GET)
+//    public ModelAndView getCategories() {
+//        return new ModelAndView("category");
+//    }
 }
