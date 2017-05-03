@@ -39,7 +39,7 @@
         .footer {
             position: absolute;
             bottom: 10%;
-            width: 100%;
+            width: 95%;
             float: left;
             text-align: right;
 
