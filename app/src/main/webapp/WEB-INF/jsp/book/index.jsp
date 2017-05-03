@@ -5,7 +5,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <style type="text/css">
         #box {
-            width: 1400px;
+            width: 1600px;
             display: block;
             margin: 20px auto 0px auto;
         }
@@ -35,10 +35,11 @@
         .text {
             text-align: center;
         }
+
         .footer {
             position: absolute;
             bottom: 10%;
-            width: 100%;
+            width: 95%;
             float: left;
             text-align: right;
 
@@ -47,29 +48,35 @@
 </head>
 <body>
 <div class="title">
-    <h2>Authors</h2>
+    <h2>Books</h2>
 </div>
 <div id="box">
     <div class="inner_box_th">
-        <p class="text">first name</p>
+        <p class="text">name</p>
     </div>
     <div class="inner_box_th">
-        <p class="text">last name</p>
+        <p class="text">description</p>
     </div>
     <div class="inner_box_th">
-        <p class="text">middle name</p>
+        <p class="text">year</p>
     </div>
     <div class="inner_box_th">
-        <p class="text">birth date</p>
+        <p class="text">isbnOrIssn</p>
     </div>
     <div class="inner_box_th">
-        <p class="text">vita</p>
+        <p class="text">authors</p>
     </div>
     <div class="inner_box_th">
-    <p class="text">reviews</p>
+        <p class="text">publisher</p>
     </div>
     <div class="inner_box_th">
-        <p class="text">books</p>
+        <p class="text">works</p>
+    </div>
+    <div class="inner_box_th">
+        <p class="text">reviews</p>
+    </div>
+    <div class="inner_box">
+        <p class="text"></p>
     </div>
     <div class="inner_box">
         <p class="text"></p>
@@ -95,8 +102,8 @@
 </div>
 <div class="footer">
     <%--<p><a href="<c:url value='/'/>">HOME</a> </p>--%>
-        <p><a href="${pageContext.request.contextPath}/">HOME</a> </p>
-        <p>&copyNepomnyachshaya L V, 2017</p>
+    <p><a href="${pageContext.request.contextPath}/">HOME</a></p>
+    <p>&copyNepomnyachshaya L V, 2017</p>
 </div>
 </body>
 </html>
