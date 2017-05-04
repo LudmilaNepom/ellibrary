@@ -38,19 +38,19 @@
 <body>
 <div id="box">
     <div>
-        <h1 class="text">Hello everybody! welcome to ellibrary</h1>
+        <h1 class="text">welcome to ellibrary</h1>
     </div>
     <div class="inner">
         <%--<p><a href="<c:url value='/book'/>">books</a></p>--%>
-        <p><a href="${pageContext.request.contextPath}/book">books</a></p>
+        <p><a href="${pageContext.request.contextPath}/book/">books</a></p>
     </div>
     <div class="inner">
         <%--<p><a href="<c:url value='/author'/>">authors</a></p>--%>
-        <p><a href="${pageContext.request.contextPath}/author">authors</a></p>
+        <p><a href="${pageContext.request.contextPath}/author/">authors</a></p>
     </div>
     <div class="inner">
         <%--<p><a href="<c:url value='/category'/>">categories</a></p>--%>
-        <p><a href="${pageContext.request.contextPath}/category">categories</a></p>
+        <p><a href="${pageContext.request.contextPath}/category/">categories</a></p>
     </div>
     <div class="footer">
         <p>&copyNepomnyachshaya L V, 2017</p>

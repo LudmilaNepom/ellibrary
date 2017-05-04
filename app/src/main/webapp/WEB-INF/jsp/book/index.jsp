@@ -1,4 +1,4 @@
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -27,6 +27,7 @@
 
         .inner_box {
             width: 198px;
+            height: 10%;
             float: left;
             border: 1px solid #000000;
             text-align: center;
@@ -75,8 +76,25 @@
     <div class="inner_box_th">
         <p class="text">reviews</p>
     </div>
+    <c:forEach items="${books}" var="book">
+    <div class="inner_box">
+        <p class="text">${book.name}</p>
+    </div>
+    <div class="inner_box">
+        <p class="text">${book.description}</p>
+    </div>
+    <div class="inner_box">
+        <p class="text">${book.year}</p>
+    </div>
+    <div class="inner_box">
+        <p class="text">${book.isbnOrIssn}</p>
+    </div>
     <div class="inner_box">
         <p class="text"></p>
+    </div>
+    <div class="inner_box">
+        <p class="text"></p>
+        <%--${book.publisher.publisherName}--%>
     </div>
     <div class="inner_box">
         <p class="text"></p>
@@ -84,21 +102,7 @@
     <div class="inner_box">
         <p class="text"></p>
     </div>
-    <div class="inner_box">
-        <p class="text"></p>
-    </div>
-    <div class="inner_box">
-        <p class="text"></p>
-    </div>
-    <div class="inner_box">
-        <p class="text"></p>
-    </div>
-    <div class="inner_box">
-        <p class="text"></p>
-    </div>
-    <div class="inner_box">
-        <p class="text"></p>
-    </div>
+    </c:forEach>
 </div>
 <div class="footer">
     <%--<p><a href="<c:url value='/'/>">HOME</a> </p>--%>
