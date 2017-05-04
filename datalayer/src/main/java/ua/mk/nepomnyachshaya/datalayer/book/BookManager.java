@@ -14,6 +14,7 @@ public class BookManager extends AbstractDAO<Book> implements BookDAO{
     public BookManager(){
         super(Book.class);
     }
+
     @Override
     public List<Book> getBooksByName(String nameOfBook) {
         List<Book> books=em.createNativeQuery("SELECT * " +

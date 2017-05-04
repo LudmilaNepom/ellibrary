@@ -7,6 +7,7 @@ import ua.mk.nepomnyachshaya.model.Publisher;
 /**
  *
  */
+
 @Repository
 public class PublisherManager extends AbstractDAO<Publisher> implements PublisherDAO{
 
