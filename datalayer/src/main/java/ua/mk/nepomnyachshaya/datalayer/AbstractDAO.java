@@ -12,7 +12,9 @@ import java.util.List;
  *
  */
 public abstract class AbstractDAO<T> {
+
     @PersistenceContext
+//            (type = PersistenceContextType.EXTENDED)
     protected EntityManager em;
     private Class<T> type;
 

@@ -8,9 +8,10 @@ import java.util.List;
  *
  */
 public interface PublisherDAO {
-    public Publisher add (Publisher publisher);
-    public void delete(long Id);
-    public Publisher update(Publisher periodicals);
-    public Publisher get(long Id);
-    public List<Publisher> getAll();
+     Publisher add (Publisher publisher);
+     void delete(long Id);
+     Publisher update(Publisher periodicals);
+     Publisher get(long Id);
+     List<Publisher> getAll();
+     Publisher getPublisherByBookId(long id);
 }

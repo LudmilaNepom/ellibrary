@@ -1,4 +1,4 @@
-package ua.mk.nepomnyachshaya.controllers.Category;
+package ua.mk.nepomnyachshaya.controllers.category;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -52,6 +52,10 @@
         <%--<p><a href="<c:url value='/category'/>">categories</a></p>--%>
         <p><a href="${pageContext.request.contextPath}/category/">categories</a></p>
     </div>
+    <div class="inner">
+        <%--<p><a href="<c:url value='/category'/>">categories</a></p>--%>
+        <p><a href="${pageContext.request.contextPath}/publisher/">publishers</a></p>
+    </div>
     <div class="footer">
         <p>&copyNepomnyachshaya L V, 2017</p>
     </div>
