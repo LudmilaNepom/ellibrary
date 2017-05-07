@@ -5,7 +5,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <style type="text/css">
         #box {
-            width: 1600px;
+            width: 2000px;
             display: block;
             margin: 20px auto 0px auto;
         }
@@ -76,33 +76,47 @@
     <div class="inner_box_th">
         <p class="text">reviews</p>
     </div>
+    <div class="inner_box_th">
+        <p class="text">action: edit</p>
+    </div>
+    <div class="inner_box_th">
+        <p class="text">action: delete</p>
+    </div>
     <c:forEach items="${books}" var="book">
-    <div class="inner_box">
-        <p class="text">${book.name}</p>
-    </div>
-    <div class="inner_box">
-        <p class="text">${book.description}</p>
-    </div>
-    <div class="inner_box">
-        <p class="text">${book.year}</p>
-    </div>
-    <div class="inner_box">
-        <p class="text">${book.isbnOrIssn}</p>
-    </div>
-    <div class="inner_box">
-        <p class="text"></p>
-    </div>
-    <div class="inner_box">
-        <p class="text"></p>
-        <%--${book.publisher.publisherName}--%>
-    </div>
-    <div class="inner_box">
-        <p class="text"></p>
-    </div>
-    <div class="inner_box">
-        <p class="text"></p>
-    </div>
+        <div class="inner_box">
+            <p class="text">${book.name}</p>
+        </div>
+        <div class="inner_box">
+            <p class="text">${book.description}</p>
+        </div>
+        <div class="inner_box">
+            <p class="text">${book.year}</p>
+        </div>
+        <div class="inner_box">
+            <p class="text">${book.isbnOrIssn}</p>
+        </div>
+        <div class="inner_box">
+            <p class="text"></p>
+        </div>
+        <div class="inner_box">
+            <p class="text">${book.publisher.publisherName}, ${book.publisher.country}</p>
+        </div>
+        <div class="inner_box">
+            <p class="text"></p>
+        </div>
+        <div class="inner_box">
+            <p class="text"></p>
+        </div>
+        <div class="inner_box">
+            <p class="text"><a href="${pageContext.request.contextPath}/book/${book.id}">editbook</a></p>
+        </div>
+        <div class="inner_box">
+            <p class="text"><a href="#">deletebook</a></p>
+        </div>
     </c:forEach>
+    <div class="inner_box">
+    <p><a href="${pageContext.request.contextPath}/newbook/">newbook</a></p>
+    </div>
 </div>
 <div class="footer">
     <%--<p><a href="<c:url value='/'/>">HOME</a> </p>--%>
