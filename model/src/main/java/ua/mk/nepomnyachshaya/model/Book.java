@@ -9,16 +9,16 @@ import java.util.List;
  *
  */
 @Entity
-@Table(name = "Book")
-@NamedQueries({@NamedQuery(name = "Book.getAll", query = "SELECT b from Book b"),
-})
+    @Table(name = "Book")
+    @NamedQueries({@NamedQuery(name = "Book.getAll", query = "SELECT b from Book b"),
+    })
 
-public class Book extends Edition implements Reviewable {
-    @ManyToMany
-    private List<Author> authors = new ArrayList<>();
-    @ManyToOne
-    private Publisher publisher;
-    private boolean series;
+    public class Book extends Edition implements Reviewable {
+        @ManyToMany
+        private List<Author> authors = new ArrayList<>();
+        @ManyToOne
+        private Publisher publisher;
+        private boolean series;
 
 
     public Book() {

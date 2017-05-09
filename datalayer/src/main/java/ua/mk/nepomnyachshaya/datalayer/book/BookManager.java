@@ -1,5 +1,6 @@
 package ua.mk.nepomnyachshaya.datalayer.book;
 
+
 import org.springframework.stereotype.Repository;
 import ua.mk.nepomnyachshaya.datalayer.AbstractDAO;
 import ua.mk.nepomnyachshaya.model.Book;
@@ -14,6 +15,7 @@ public class BookManager extends AbstractDAO<Book> implements BookDAO{
     public BookManager(){
         super(Book.class);
     }
+
     @Override
     public List<Book> getBooksByName(String nameOfBook) {
         List<Book> books=em.createNativeQuery("SELECT * " +
