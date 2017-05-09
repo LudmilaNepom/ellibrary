@@ -12,8 +12,8 @@
                 $.ajax({
                     url: '/book/', // путь к обработчику
                     type: 'PUT', // метод передачи
-                    data: ,
-                    dataType: ,
+                    data: this.data,
+                    dataType: 'text/html',
                 });
             });
             }
@@ -62,14 +62,14 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="cell">
-                <label class="lable" for="publisher">Publisher</label>
-                <div class="inp">
-                    <form:select path="publisher" items="${publ}" multiple="true" itemValue="id" itemLabel="publisher" class="form input" />
-                </div>
-            </div>
-        </div>
+        <%--<div class="row">--%>
+            <%--<div class="cell">--%>
+                <%--<label class="lable" for="publisher">Publisher</label>--%>
+                <%--<div class="inp">--%>
+                    <%--<form:select path="publisher" items="${publ}" multiple="true" itemValue="id" itemLabel="publisher" class="form input" />--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
        <div class="row">
             <div class="cell">
