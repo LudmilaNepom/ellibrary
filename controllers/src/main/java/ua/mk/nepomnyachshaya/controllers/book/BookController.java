@@ -38,13 +38,13 @@ public class BookController {
         Publisher publisher=publisherDAO.getPublisherByBookId(id);
         book.setPublisher(publisher);
         ModelAndView modelAndView=new ModelAndView("book/bookform");
-        modelAndView.addObject(book);
+        modelAndView.addObject("book", book);
         return modelAndView;
     }
 
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.PUT)
-    public String updateBook(Book book) {
-        Book bookFromDB=bookDAO.update(book);
+    public String updateBook(@ModelAttribute Book book) {
+        bookDAO.update(book);
       return "/";
     }
 

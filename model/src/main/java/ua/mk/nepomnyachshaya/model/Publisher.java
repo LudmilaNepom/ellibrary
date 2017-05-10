@@ -16,6 +16,7 @@ public class Publisher {
     private String publisherName;
     private String country;
 
+
     public Publisher() {
     }
 
@@ -72,10 +73,7 @@ public class Publisher {
 
     @Override
     public String toString() {
-        return "Publisher{" +
-                "publisherName='" + publisherName + '\'' +
-                ", country='" + country + '\'' +
-                '}';
+        return new String(id+publisherName + ", "+country);
     }
 }
 

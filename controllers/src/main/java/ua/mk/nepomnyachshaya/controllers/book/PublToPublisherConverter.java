@@ -9,7 +9,7 @@ import ua.mk.nepomnyachshaya.model.Publisher;
 /**
  * A converter class used in views to map id's to actual Publisher objects.
  */
-@Component
+@Component(value = "publToPublisherConverter")
 public class PublToPublisherConverter implements Converter<Object, Publisher>{
 
     @Autowired

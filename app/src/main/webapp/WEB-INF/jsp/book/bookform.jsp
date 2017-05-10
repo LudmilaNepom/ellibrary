@@ -4,26 +4,28 @@
 <html>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script>
-        function send_form(){
-            $('#form_id').submit(function(event){
-                event.preventDefault()
+    <script type="text/javascript" language="javascript">
+        function send(e){
+            e.preventDefault()
+            var data=this.data
+            var id=${book.id}
                 $.ajax({
-                    url: '/book/', // путь к обработчику
-                    type: 'PUT', // метод передачи
-                    data: this.data,
-                    dataType: 'text/html',
+                    type: 'PUT',
+                    url: '${pageContext.request.contextPath}/book/id',
+                    data: data,
+                    dataType: 'text/html'
                 });
-            });
-            }
+        };
+        $(function(){
+            $('#form_id').on('submit', send);
+        });
     </script>
     <title>Book form</title>
 </head>
 <body>
 <div class="generic-container">
     <div class="header">Book Form</div>
-    <form:form  id="form_id" modelAttribute="book" class="form-horizontal">
+    <form:form id="form_id" modelAttribute="book" action="javascript:void(null);" class="form-horizontal">
         <form:input type="hidden" path="id" id="id"/>
 
         <div class="row">
@@ -39,7 +41,7 @@
             <div class="cell">
                 <label class="lable" for="description">Description</label>
                 <div class="inp">
-                    <form:input type="text" path="description" id="description" class="form input" />
+                    <form:input type="text" path="description" id="description" class="form input"/>
                 </div>
             </div>
         </div>
@@ -48,7 +50,7 @@
             <div class="cell">
                 <label class="lable" for="year">Year</label>
                 <div class="inp">
-                    <form:input type="text" path="year" id="year" class="form input" />
+                    <form:input type="text" path="year" id="year" class="form input"/>
                 </div>
             </div>
         </div>
@@ -57,24 +59,29 @@
             <div class="cell">
                 <label class="lable" for="isbnOrIssn">ISBN</label>
                 <div class="inp">
-                    <form:input type="text" path="isbnOrIssn" id="isbnOrIssn" class="form input" />
+                    <form:input type="text" path="isbnOrIssn" id="isbnOrIssn" class="form input"/>
                 </div>
             </div>
         </div>
 
-        <%--<div class="row">--%>
-            <%--<div class="cell">--%>
-                <%--<label class="lable" for="publisher">Publisher</label>--%>
-                <%--<div class="inp">--%>
-                    <%--<form:select path="publisher" items="${publ}" multiple="true" itemValue="id" itemLabel="publisher" class="form input" />--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
-       <div class="row">
+        <div class="row">
             <div class="cell">
-                <%--<input type="submit" value="Create" id="submit" onclick="send_form(form_id)" class="form input"/>--%>
-                    <a href="#" class="add" onclick='send_form()'>Submit</a>
+                <label class="lable" for="publisher">Publisher</label>
+                <div class="inp">
+                    <form:select path="publisher">
+                        <c:forEach var="publisher" items="${publ}">
+                            <form:option value="${publisher.id}"><c:out value="${publisher.publisherName}, ${publisher.country}"/></form:option>
+                        </c:forEach>
+                    </form:select>
+                        <%--<form:select path="publisher" items="${publ}" multiple="true" itemValue="id"  itemLabel="publisherName" class="form input" />--%>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell">
+                <input type="submit"  value="Edit"  class="btn"/> or <a href="<c:url value='/book/' />">Cancel</a>
+                    <%--<a href="#" class="add" onclick='send_form()'>Submit</a>--%>
             </div>
         </div>
     </form:form>
