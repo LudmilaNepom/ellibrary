@@ -7,13 +7,13 @@
     <script type="text/javascript" language="javascript">
         function send(e){
             e.preventDefault()
-            var data=this.data
-
+            var $form = $(this);
+            var id=${book.id};
                 $.ajax({
                     type: 'PUT',
-                    url: '${pageContext.request.contextPath}/book/2',
-                    data: data,
-                    dataType: 'text/html'
+                    url: '${pageContext.request.contextPath}/book/{id}',
+                    data: $form.serialize(),
+
                 });
         };
         $(function(){
