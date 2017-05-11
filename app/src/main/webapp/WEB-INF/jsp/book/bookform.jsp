@@ -6,15 +6,18 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript" language="javascript">
         function send(e){
-            e.preventDefault()
-            var $form = $(this);
+            var formData = new FormData(this);
             var id=${book.id};
                 $.ajax({
                     type: 'PUT',
                     url: '${pageContext.request.contextPath}/book/{id}',
-                    data: $form.serialize(),
-
+                    data: formData,
+                    mimeType:'multipart/form-data',
+                    contentType: false,
+                    cache: false,
+                    processData:false
                 });
+            e.preventDefault
         };
         $(function(){
             $('#form_id').on('submit', send);

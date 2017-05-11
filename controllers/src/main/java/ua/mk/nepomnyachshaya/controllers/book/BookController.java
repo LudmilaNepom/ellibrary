@@ -46,7 +46,7 @@ public class BookController {
     public String updateBook(@RequestBody Book book, @PathVariable Integer id) {
         if (book.getId() == (long)id){
         bookDAO.update(book);}
-        return "/";
+        return "/book/index";
     }
 
 
