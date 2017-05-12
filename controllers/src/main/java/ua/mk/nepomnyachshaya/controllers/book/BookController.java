@@ -1,5 +1,6 @@
 package ua.mk.nepomnyachshaya.controllers.book;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import ua.mk.nepomnyachshaya.datalayer.publisher.PublisherDAO;
 import ua.mk.nepomnyachshaya.model.Book;
 import ua.mk.nepomnyachshaya.model.Publisher;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -43,7 +45,16 @@ public class BookController {
     }
 
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.PUT )
-    public String updateBook(@RequestBody Book book, @PathVariable Integer id) {
+    public String updateBook(@RequestBody String json, @PathVariable Integer id) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Book requestValue = mapper.readValue(json, Book.class);
+        Book book = new Book();
+        book.setId(requestValue.getId());
+        book.setName(requestValue.getName());
+        book.setDescription(requestValue.getDescription());
+        book.setYear(requestValue.getYear());
+        book.setIsbnOrIssn(requestValue.getIsbnOrIssn());
+        book.setPublisher(requestValue.getPublisher());
         if (book.getId() == (long)id){
         bookDAO.update(book);}
         return "/book/index";
