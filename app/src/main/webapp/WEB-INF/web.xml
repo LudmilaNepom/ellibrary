@@ -25,5 +25,14 @@
         <servlet-name>ellibrary</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>getMethodConvertingFilter</filter-name>
+        <filter-class>ua.mk.nepomnyachshaya.app.GetMethodConvertingFilter</filter-class>
+    </filter>
 
+    <filter-mapping>
+        <filter-name>getMethodConvertingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 </web-app>

@@ -7,25 +7,21 @@
     <script type="text/javascript" language="javascript">
         function send(e) {
             var id = $('#id').val();
+//            var id = parseInt (idString);
             var name = $('#name').val();
             var description = $('#description').val();
             var year = $('#year').val();
+//            var year = parseInt(yearString);
             var isbnOrIssn = $('#isbnOrIssn').val();
-            var publisher = $('#publisher').val();
-            var json = {
-                "id": id,
-                "name": name,
-                "description": description,
-                "year": year,
-                "isbnOrIssn": isbnOrIssn,
-                "publisher": publisher
-            };
-
+            var publisherId = $('#publisher').val();
+//           var publisherId = parseInt(publisherIdString);
+            var json = {"id": id,"name": name,"description": description,"year": year,"isbnOrIssn": isbnOrIssn,"publisherId": publisherId};
+            var url = "${pageContext.request.contextPath}/book/"+parseInt(id);
             $.ajax({
                 type: 'PUT',
-                url: '${pageContext.request.contextPath}/book/{id}',
+                url: url,
                 data: JSON.stringify(json),
-                contentType: "application/json; charset=utf-8",
+                contentType: 'application/json; charset=utf-8',
                 cache: false
             });
             e.preventDefault

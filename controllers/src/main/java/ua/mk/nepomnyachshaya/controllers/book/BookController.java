@@ -11,7 +11,9 @@ import ua.mk.nepomnyachshaya.model.Book;
 import ua.mk.nepomnyachshaya.model.Publisher;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -45,21 +47,26 @@ public class BookController {
     }
 
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.PUT )
-    public String updateBook(@RequestBody String json, @PathVariable Integer id) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Book requestValue = mapper.readValue(json, Book.class);
+    public ModelAndView updateBook(@RequestBody String json, @PathVariable Integer id) throws IOException {
+        Map<String,String> myMap = new HashMap<String, String>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        myMap = objectMapper.readValue(json, HashMap.class);
         Book book = new Book();
-        book.setId(requestValue.getId());
-        book.setName(requestValue.getName());
-        book.setDescription(requestValue.getDescription());
-        book.setYear(requestValue.getYear());
-        book.setIsbnOrIssn(requestValue.getIsbnOrIssn());
-        book.setPublisher(requestValue.getPublisher());
-        if (book.getId() == (long)id){
-        bookDAO.update(book);}
-        return "/book/index";
+        book.setId(new Integer(myMap.get("id")));
+        book.setName(myMap.get("name"));
+        book.setDescription(myMap.get("description"));
+        book.setYear(new Integer(myMap.get("year")));
+        book.setIsbnOrIssn(myMap.get("isbnOrIssn"));
+        book.setPublisher(publisherDAO.get(new Integer(myMap.get("publisherId"))));
+        bookDAO.update(book);
+//        List<Book> books=bookDAO.getAll();
+//        for (Book b:books) {
+//            Publisher publisher=publisherDAO.getPublisherByBookId(b.getId());
+//            b.setPublisher(publisher);
+//        }
+        return  new ModelAndView("forward:/book/");
+//                .addObject("books", books);
     }
-
 
     /**
      * This method will provide Publisher list to views
