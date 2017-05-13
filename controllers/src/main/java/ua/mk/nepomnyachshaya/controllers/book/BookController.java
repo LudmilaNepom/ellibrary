@@ -43,6 +43,7 @@ public class BookController {
         book.setPublisher(publisher);
         ModelAndView modelAndView=new ModelAndView("book/bookform");
         modelAndView.addObject("book", book);
+        modelAndView.addObject("message", false);
         return modelAndView;
     }
 
@@ -58,14 +59,10 @@ public class BookController {
         book.setYear(new Integer(myMap.get("year")));
         book.setIsbnOrIssn(myMap.get("isbnOrIssn"));
         book.setPublisher(publisherDAO.get(new Integer(myMap.get("publisherId"))));
-        bookDAO.update(book);
-//        List<Book> books=bookDAO.getAll();
-//        for (Book b:books) {
-//            Publisher publisher=publisherDAO.getPublisherByBookId(b.getId());
-//            b.setPublisher(publisher);
-//        }
-        return  new ModelAndView("forward:/book/");
-//                .addObject("books", books);
+        book=bookDAO.update(book);
+        return  new ModelAndView("book/bookform")
+                .addObject("book", book)
+                .addObject("message", true);
     }
 
     /**
@@ -75,5 +72,6 @@ public class BookController {
     public List<Publisher> initializePublishers() {
         return publisherDAO.getAll();
     }
+
 
 }

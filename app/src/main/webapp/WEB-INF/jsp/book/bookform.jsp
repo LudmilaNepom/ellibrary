@@ -15,8 +15,15 @@
             var isbnOrIssn = $('#isbnOrIssn').val();
             var publisherId = $('#publisher').val();
 //           var publisherId = parseInt(publisherIdString);
-            var json = {"id": id,"name": name,"description": description,"year": year,"isbnOrIssn": isbnOrIssn,"publisherId": publisherId};
-            var url = "${pageContext.request.contextPath}/book/"+parseInt(id);
+            var json = {
+                "id": id,
+                "name": name,
+                "description": description,
+                "year": year,
+                "isbnOrIssn": isbnOrIssn,
+                "publisherId": publisherId
+            };
+            var url = "${pageContext.request.contextPath}/book/" + parseInt(id);
             $.ajax({
                 type: 'PUT',
                 url: url,
@@ -97,6 +104,12 @@
             </div>
         </div>
     </form:form>
+    <c:choose>
+    <c:when test="${message}">
+    <h3> Book was edited <h3>
+        </c:when>
+        </c:choose>
+            <p><a href="${pageContext.request.contextPath}/">HOME</a></p>
 </div>
 </body>
 </html>
