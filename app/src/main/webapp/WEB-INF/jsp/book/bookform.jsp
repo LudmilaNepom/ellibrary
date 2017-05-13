@@ -29,7 +29,10 @@
                 url: url,
                 data: JSON.stringify(json),
                 contentType: 'application/json; charset=utf-8',
-                cache: false
+                cache: false,
+                success: function(result) {
+                    $('#generic-container').html(result);
+                }
             });
             e.preventDefault
         }
@@ -41,7 +44,7 @@
     <title>Book form</title>
 </head>
 <body>
-<div class="generic-container">
+<div id="generic-container">
     <div class="header">Book Form</div>
     <form:form id="form_id" modelAttribute="book" action="javascript:void(null);" class="form-horizontal">
         <form:input type="hidden" path="id" id="id"/>
@@ -99,17 +102,26 @@
 
         <div class="row">
             <div class="cell">
-                <input type="submit" value="Edit" class="btn"/> or <a href="<c:url value='/book/' />">Cancel</a>
+                <c:choose>
+                <c:when test="${message}">
+                    <input type="button" value="done" class="btn"/>
+                </c:when>
+                    <c:otherwise>
+                        <input type="submit" value="Edit" class="btn"/>
+                    </c:otherwise>
+                </c:choose> or <a href="<c:url value='/book/' />">Back to books</a>
                     <%--<a href="#" class="add" onclick='send_form()'>Submit</a>--%>
             </div>
         </div>
     </form:form>
+    <div id="message">
     <c:choose>
     <c:when test="${message}">
-    <h3> Book was edited <h3>
+    <h3> Book has been edited </h3>
         </c:when>
         </c:choose>
             <p><a href="${pageContext.request.contextPath}/">HOME</a></p>
+    </div>
 </div>
 </body>
 </html>
