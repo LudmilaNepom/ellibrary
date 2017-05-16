@@ -8,9 +8,9 @@ import java.util.List;
  *
  */
 public interface PeriodicalsDAO {
-    public Periodicals add (Periodicals periodicals);
-    public void delete(long Id);
-    public Periodicals update(Periodicals periodicals);
-    public Periodicals get(long Id);
-    public List<Periodicals> getAll();
+     Periodicals add (Periodicals periodicals);
+     void delete(int Id);
+     Periodicals update(Periodicals periodicals);
+     Periodicals get(int Id);
+     List<Periodicals> getAll();
 }

@@ -8,9 +8,9 @@ import java.util.List;
  *
  */
 public interface ReviewDAO {
-    public Review add (Review review);
-    public void delete(long Id);
-    public Review update(Review review);
-    public Review get(long Id);
-    public List<Review> getAll();
+     Review add (Review review);
+     void delete(int Id);
+     Review update(Review review);
+     Review get(int Id);
+     List<Review> getAll();
 }

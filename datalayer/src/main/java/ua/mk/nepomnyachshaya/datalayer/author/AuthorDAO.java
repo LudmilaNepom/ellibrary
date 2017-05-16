@@ -9,10 +9,10 @@ import java.util.List;
  */
 public interface AuthorDAO {
      Author add (Author author);
-     void delete(long Id);
+     void delete(int Id);
      Author update(Author author);
-     Author get(long Id);
+     Author get(int Id);
      List<Author> getAll();
-     List<Author> getAuthorsByBookId(long id);
+     List<Author> getAuthorsByBookId(int id);
      List<Author> getAuthorsByFirstLettersOfSurname(String str);
 }

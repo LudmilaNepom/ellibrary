@@ -1,6 +1,7 @@
 package ua.mk.nepomnyachshaya.datalayer.author;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ua.mk.nepomnyachshaya.datalayer.AbstractDAO;
 import ua.mk.nepomnyachshaya.model.Author;
 
@@ -16,7 +17,9 @@ public class AuthorManager extends AbstractDAO<Author> implements AuthorDAO {
     public AuthorManager(){
         super(Author.class);
     }
-    public List<Author> getAuthorsByBookId(long id){
+
+    @Transactional(readOnly = true)
+    public List<Author> getAuthorsByBookId(int id){
         List<Author> authorsByBookId=em.createNativeQuery("SELECT a.* " +
                 "FROM Author a " +
                 "JOIN book_author ba on a.id=ba.authors_id " +
@@ -25,6 +28,7 @@ public class AuthorManager extends AbstractDAO<Author> implements AuthorDAO {
                 .getResultList();
         return authorsByBookId;
     }
+    @Transactional(readOnly = true)
     public List<Author> getAuthorsByFirstLettersOfSurname(String str) {
         List<Author> authorsByFirstLettersOfSurname = em.createNativeQuery("SELECT a.* " +
                 "FROM Author a " +

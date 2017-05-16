@@ -3,9 +3,6 @@ package ua.mk.nepomnyachshaya.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/**
- * Created by User on 03.03.2017.
- */
 @Embeddable
 public class ReviewableForDB {
     @Column
@@ -13,7 +10,7 @@ public class ReviewableForDB {
     @Column
     String name;
     @Column
-    Long idOf;
+    Integer idOf;
 
 
     public ReviewableForDB() {
@@ -33,16 +30,16 @@ public class ReviewableForDB {
             idOf=((Series)reviewable).getId();
         } else {
             name="неизвестный объект";
-            idOf=0L;
+            idOf=0;
 
         }
     }
 
-    public Long getIdOf() {
+    public Integer getIdOf() {
         return idOf;
     }
 
-    public void setIdOf(Long idOf) {
+    public void setIdOf(Integer idOf) {
         this.idOf = idOf;
     }
 

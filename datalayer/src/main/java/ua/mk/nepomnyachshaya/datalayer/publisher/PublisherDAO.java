@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface PublisherDAO {
      Publisher add (Publisher publisher);
-     void delete(long Id);
+     void delete(int Id);
      Publisher update(Publisher periodicals);
-     Publisher get(long Id);
+     Publisher get(int Id);
      List<Publisher> getAll();
-     Publisher getPublisherByBookId(long id);
+     Publisher getPublisherByBookId(int id);
 }

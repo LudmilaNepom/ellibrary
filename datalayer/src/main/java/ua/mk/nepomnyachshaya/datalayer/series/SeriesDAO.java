@@ -8,9 +8,9 @@ import java.util.List;
  *
  */
 public interface SeriesDAO {
-    public Series add (Series series);
-    public void delete(long Id);
-    public Series update(Series series);
-    public Series get(long Id);
-    public List<Series> getAll();
+     Series add (Series series);
+     void delete(int Id);
+     Series update(Series series);
+     Series get(int Id);
+     List<Series> getAll();
 }

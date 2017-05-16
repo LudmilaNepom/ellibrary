@@ -13,13 +13,13 @@ import java.util.List;
 public abstract class Edition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Integer id;
     @Column(name = "name", length = 128)
     private String name;
     @Column(name = "description", length = 128)
     private String description;
     @Column(name = "year")
-    private int year;
+    private Integer year;
     @Column(name = "isbnOrIssn", length = 128)
     private String isbnOrIssn;
     @OneToOne
@@ -37,11 +37,11 @@ public abstract class Edition {
         this.isbnOrIssn = isbnOrIssn.replaceAll(reg, "");
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -69,11 +69,11 @@ public abstract class Edition {
         return description;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 

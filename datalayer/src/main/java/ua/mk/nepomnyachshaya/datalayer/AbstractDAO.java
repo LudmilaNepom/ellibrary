@@ -21,6 +21,7 @@ public abstract class AbstractDAO<T> {
     public AbstractDAO(Class<T> type) {
         this.type = type;
     }
+
     @Transactional
     public T add(T object) {
 //        em.getTransaction().begin();
@@ -29,7 +30,7 @@ public abstract class AbstractDAO<T> {
         return objectFromDB;
     }
     @Transactional
-    public void delete(long Id) {
+    public void delete(int Id) {
 //        em.getTransaction().begin();
         em.remove(get(Id));
 //        em.getTransaction().commit();
@@ -41,11 +42,12 @@ public abstract class AbstractDAO<T> {
 //        em.getTransaction().commit();
         return b;
     }
-
-    public T get(long Id) {
+    @Transactional(readOnly = true)
+    public T get(int Id) {
         return em.find(type, Id);
     }
 
+    @Transactional(readOnly = true)
     public List<T> getAll() {
         TypedQuery<T> namedQuery = em.createNamedQuery(type.getSimpleName() + ".getAll", type);
         return namedQuery.getResultList();

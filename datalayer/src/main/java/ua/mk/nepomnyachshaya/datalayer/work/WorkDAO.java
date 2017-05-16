@@ -4,13 +4,10 @@ import ua.mk.nepomnyachshaya.model.Work;
 
 import java.util.List;
 
-/**
- * Created by User on 06.03.2017.
- */
 public interface WorkDAO {
-    public Work add (Work work);
-    public void delete(long Id);
-    public Work update(Work work);
-    public Work get(long Id);
-    public List<Work> getAll();
+     Work add (Work work);
+     void delete(int Id);
+     Work update(Work work);
+     Work get(int Id);
+     List<Work> getAll();
 }

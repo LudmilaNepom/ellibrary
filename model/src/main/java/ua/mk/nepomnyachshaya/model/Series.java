@@ -14,7 +14,7 @@ import java.util.List;
 public class Series implements Reviewable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Integer id;
     @Column
     private String nameOfSeries;
     @OneToMany
@@ -28,11 +28,11 @@ public class Series implements Reviewable {
         this.worksInSeries = worksInSeries;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

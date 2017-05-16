@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class Author{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Integer id;
     @Column
     private String firstName;
     @Column
@@ -38,11 +38,11 @@ public class Author{
         this.birthDate = birthYear;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -108,7 +108,7 @@ public class Author{
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
+        int result = getId() ^ (getId() >>> 32);
         result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
         result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
         result = 31 * result + (getMiddleName() != null ? getMiddleName().hashCode() : 0);

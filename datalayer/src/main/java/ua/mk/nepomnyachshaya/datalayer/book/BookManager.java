@@ -2,6 +2,7 @@ package ua.mk.nepomnyachshaya.datalayer.book;
 
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ua.mk.nepomnyachshaya.datalayer.AbstractDAO;
 import ua.mk.nepomnyachshaya.model.Book;
 
@@ -10,12 +11,14 @@ import java.util.List;
 /**
  *
  */
+
 @Repository
+
 public class BookManager extends AbstractDAO<Book> implements BookDAO{
     public BookManager(){
         super(Book.class);
     }
-
+    @Transactional(readOnly = true)
     @Override
     public List<Book> getBooksByName(String nameOfBook) {
         List<Book> books=em.createNativeQuery("SELECT * " +
@@ -25,7 +28,7 @@ public class BookManager extends AbstractDAO<Book> implements BookDAO{
                 .getResultList();
         return books;
     }
-
+    @Transactional(readOnly = true)
     @Override
     public List<Book> getBooksByAuthorSurname (String surnameOfAuthor) {
         List<Book> books=em.createNativeQuery("SELECT DISTINCT b.* " +
@@ -38,7 +41,7 @@ public class BookManager extends AbstractDAO<Book> implements BookDAO{
         return books;
 
     }
-
+    @Transactional(readOnly = true)
     @Override
     public List<Book> getBooksByCategoryName(String nameOfCategory) {
         List<Book> books=em.createNativeQuery("SELECT b.* \n" +
