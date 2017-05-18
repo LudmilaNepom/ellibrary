@@ -1,6 +1,9 @@
 package ua.mk.nepomnyachshaya.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Calendar;
 
 /**
@@ -16,6 +19,9 @@ public class Author{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Zа-яёА-ЯЁ\\s\\-]")
+    @Size
     @Column
     private String firstName;
     @Column

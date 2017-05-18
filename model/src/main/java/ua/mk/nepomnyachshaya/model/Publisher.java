@@ -1,6 +1,9 @@
 package ua.mk.nepomnyachshaya.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -13,7 +16,12 @@ public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @NotNull
+    @Size(min = 1, max = 128)
+    @Pattern(regexp = "^[0-9a-zA-Zа-яёА-ЯЁ\\s\\-\"]")
     private String publisherName;
+    @NotNull
+    @Size(min = 1, max = 128)
     private String country;
 
 

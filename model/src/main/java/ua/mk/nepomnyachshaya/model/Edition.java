@@ -1,6 +1,8 @@
 package ua.mk.nepomnyachshaya.model;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +16,24 @@ public abstract class Edition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @NotNull
+    @Size(max=128, min = 1)
+    @Pattern(regexp = "^[0-9a-zA-Zа-яёА-ЯЁ\\s\\-.,!?\"]")
     @Column(name = "name", length = 128)
     private String name;
+    @NotNull
+    @Size(max=128, min = 1)
+    @Pattern(regexp = "^[0-9a-zA-Zа-яёА-ЯЁ\\s\\-.,!?\"]+$")
     @Column(name = "description", length = 128)
     private String description;
+    @NotNull
+    @Max(2017)
+    @Min(1900)
     @Column(name = "year")
     private Integer year;
+    @NotNull
+    @Size(max=34, min =10)
+    @Pattern(regexp = "^[0-9A-Z\\-:]+$")
     @Column(name = "isbnOrIssn", length = 128)
     private String isbnOrIssn;
     @OneToOne

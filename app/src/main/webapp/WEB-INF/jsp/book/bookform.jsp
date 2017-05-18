@@ -139,6 +139,9 @@
             <div class="inp">
                 <form:input type="text" path="name" id="name" class="form_input"/>
             </div>
+            <div class="has-error">
+                <form:errors path="name" class="help-inline"/>
+            </div>
         </div>
     </div>
 
@@ -147,6 +150,9 @@
             <label class="lable" for="description">Description</label>
             <div class="inp">
                 <form:input type="text" path="description" id="description" class="form_input"/>
+            </div>
+            <div class="has-error">
+                <form:errors path="description" class="help-inline"/>
             </div>
         </div>
     </div>
@@ -157,6 +163,9 @@
             <div class="inp">
                 <form:input type="text" path="year" id="year" class="form_input"/>
             </div>
+            <div class="has-error">
+                <form:errors path="year" class="help-inline"/>
+            </div>
         </div>
     </div>
 
@@ -165,6 +174,9 @@
             <label class="lable" for="isbnOrIssn">ISBN</label>
             <div class="inp">
                 <form:input type="text" path="isbnOrIssn" id="isbnOrIssn" class="form_input"/>
+            </div>
+            <div class="has-error">
+                <form:errors path="isbnOrIssn" class="help-inline"/>
             </div>
         </div>
     </div>
@@ -175,13 +187,16 @@
                    for="publisher">Publisher: ${book.publisher.publisherName}, ${book.publisher.country} </label>
             <div class="inp">
 
-                <p class="lable">If you are editing book select:</p>
+                <p class="lable">If you are editing book, please select:</p>
                 <form:select path="publisher" id="publisher" class="form_input">
                     <c:forEach var="publisher" items="${publ}">
                         <form:option value="${publisher.id}"><c:out
                                 value="${publisher.publisherName}, ${publisher.country}"/></form:option>
                     </c:forEach>
                 </form:select>
+                <div class="has-error">
+                    <form:errors path="publisher" class="help-inline"/>
+                </div>
                     <%--<form:select path="publisher" items="${publ}" multiple="true" itemValue="id"  itemLabel="publisherName" class="form input" />--%>
             </div>
         </div>

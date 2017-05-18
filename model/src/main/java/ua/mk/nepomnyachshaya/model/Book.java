@@ -1,6 +1,7 @@
 package ua.mk.nepomnyachshaya.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
     public class Book extends Edition implements Reviewable {
         @ManyToMany
         private List<Author> authors = new ArrayList<>();
+        @NotNull
         @ManyToOne
         private Publisher publisher;
         private boolean series;
@@ -81,7 +83,7 @@ import java.util.List;
 
     @Override
     public String toString() {
-        return "Book{" +
+        return super.toString()+
                 "authors " + Arrays.toString(authors.toArray()) +
                 ", publisher " + publisher.getPublisherName() +
                 ", series " + series +

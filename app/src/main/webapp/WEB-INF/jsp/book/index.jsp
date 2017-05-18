@@ -37,16 +37,19 @@
         .text {
             text-align: center;
         }
+
         .hidden {
             display: none;
             width: 600px;
             margin: 20px auto 0 auto;
         }
+
         .active {
             width: 600px;
             margin: 20px auto 0 auto;
 
         }
+
         .row {
             width: 100%;
             color: steelblue;
@@ -79,9 +82,8 @@
             text-align: left;
         }
 
-
         .footer {
-            position: absolute;
+            position: relative;
             bottom: 10%;
             width: 95%;
             float: left;
@@ -92,11 +94,10 @@
     <script>
         function show() {
             $('#new_book_form').removeClass('hidden').addClass('active');
-
         }
-    $(function () {
-    $('#create_new_book').on('click', show);
-    });
+        $(function () {
+            $('#create_new_book').on('click', show);
+        });
     </script>
 </head>
 <body>
@@ -164,13 +165,13 @@
 
     </c:forEach>
     <div class="inner_box">
-    <p><input id="create_new_book" type="button" value="NEWBOOK" class="btn"/></p>
+        <p><input id="create_new_book" type="button" value="NEWBOOK" class="btn"/></p>
     </div>
 </div>
 <div id="new_book_form" class="hidden">
     <div class="header">Book Form</div>
-    <form:form id="form_id" method="POST" modelAttribute="book"  class="form-horizontal">
-        <form:input type="hidden" path="id" id="id" value="0"/>
+    <form:form id="form_id" method="POST" modelAttribute="book" class="form-horizontal">
+    <form:input type="hidden" path="id" id="id" value="0"/>
     <div class="row">
         <div class="cell">
             <label class="lable" for="name">Name</label>
@@ -188,21 +189,20 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="cell">
             <label class="lable" for="year">Year</label>
             <div class="inp">
-                <form:input type="number" path="year" id="year" class="form_input"/>
+                <form:input type="text" path="year" id="year" class="form_input"/>
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="cell">
-            <label class="lable" for="isbnOrIssn">ISBN</label>
+            <label class="lable" for="isbn">ISBN</label>
             <div class="inp">
-                <form:input type="text" path="isbnOrIssn" id="isbnOrIssn" class="form_input"/>
+                <form:input type="text" path="isbn" id="isbn" class="form_input"/>
             </div>
         </div>
     </div>
@@ -229,15 +229,19 @@
         <div class="cell">
             <div><p><input id="create_new" type="submit" value="CREATE NEW BOOK" class="btn"/></p></div>
         </div>
-        </form:form>
-</div>
-    <div id="message">
-        <c:choose>
-            <c:when test="${message}">
-                <h3> ${content} </h3>
-            </c:when>
-        </c:choose>
+
+
+    </form:form>
     </div>
+
+</div>
+<div id="message">
+    <c:choose>
+        <c:when test="${message}">
+            <h3> ${content} </h3>
+        </c:when>
+    </c:choose>
+</div>
 <div class="footer">
     <%--<p><a href="<c:url value='/'/>">HOME</a> </p>--%>
     <p><a href="${pageContext.request.contextPath}/">HOME</a></p>
