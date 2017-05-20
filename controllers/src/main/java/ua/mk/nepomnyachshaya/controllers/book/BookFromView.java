@@ -2,6 +2,10 @@ package ua.mk.nepomnyachshaya.controllers.book;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -11,12 +15,20 @@ public class BookFromView implements Serializable{
     @JsonView
     private String id;
     @JsonView
+    @Size(max=128, min = 1)
+    @Pattern(regexp = "^[0-9a-zA-Zа-яёА-ЯЁ\\s\\-.,!?\"]+$")
     private String name;
     @JsonView
+    @Size(max=128, min = 1)
+    @Pattern(regexp = "^[0-9a-zA-Zа-яёА-ЯЁ\\s\\-.,:!?\"]+$")
     private String description;
     @JsonView
+    @Max(2017)
+    @Min(1900)
     private String year;
     @JsonView
+    @Size(max=34, min =10)
+    @Pattern(regexp = "^[0-9A-Z\\s\\-:]+$")
     private String isbnOrIssn;
     @JsonView
     private String publisherId;

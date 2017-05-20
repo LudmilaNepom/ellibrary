@@ -3,7 +3,10 @@ package ua.mk.nepomnyachshaya.controllers.book;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -12,6 +15,7 @@ import ua.mk.nepomnyachshaya.datalayer.publisher.PublisherDAO;
 import ua.mk.nepomnyachshaya.model.Book;
 import ua.mk.nepomnyachshaya.model.Publisher;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +32,8 @@ public class BookController {
     private BookDAO bookDAO;
     @Autowired
     private PublisherDAO publisherDAO;
+    @Autowired
+    MessageSource messageSource;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getBooks() {
@@ -73,15 +79,23 @@ public class BookController {
         Book book = bookDAO.get(id);
         Publisher publisher = publisherDAO.getPublisherByBookId(id);
         book.setPublisher(publisher);
+        BookFromView bookFromView=new BookFromView();
+        bookFromView.setId(new Integer(id).toString() );
+        bookFromView.setName(book.getName());
+        bookFromView.setIsbnOrIssn(book.getIsbnOrIssn());
+        bookFromView.setDescription(book.getDescription());
+        bookFromView.setYear(book.getYear().toString());
+        bookFromView.setPublisherId(book.getPublisher().getId().toString());
         ModelAndView modelAndView = new ModelAndView("book/bookform");
-        modelAndView.addObject("book", book);
+        modelAndView.addObject("book", bookFromView);
         modelAndView.addObject("message", false);
         modelAndView.addObject("content", "");
         return modelAndView;
     }
     @JsonView
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.PUT, consumes = "application/json", produces = "text/html")
-    public ModelAndView updateBook(@RequestBody BookFromView bookFromView, @PathVariable Integer id) {
+    public String updateBook(@RequestBody @Valid BookFromView bookFromView, BindingResult result, ModelMap model,
+                                   @PathVariable Integer id) {
 
         System.out.println(bookFromView.toString());
         Book book1 = new Book();
@@ -91,21 +105,31 @@ public class BookController {
         book1.setYear(Integer.parseInt(bookFromView.getYear()));
         book1.setIsbnOrIssn(bookFromView.getIsbnOrIssn());
         book1.setPublisher(publisherDAO.get(Integer.parseInt(bookFromView.getPublisherId())));
-        Book bookFromDB = bookDAO.update(book1);
-        ModelAndView modelAndView = new ModelAndView("book/bookform");
-//        System.out.println(result.toString());
-//        if (result.hasErrors()) {
-//            modelAndView.addObject("book", book);
-//            modelAndView.addObject("errors", result);
-//            modelAndView.addObject("message", true);
-//            modelAndView.addObject("content", "Sended book has errors");
-//        } else {
-//            book = bookDAO.update(book);
-            modelAndView.addObject("book", bookFromDB);
-            modelAndView.addObject("message", true);
-            modelAndView.addObject("content", "Book has been edited");
-//        }
-        return modelAndView;
+//        Book bookFromDB = bookDAO.update(book1);
+//        ModelAndView modelAndView = new ModelAndView("book/bookform");
+        System.out.println(book1.toString() + "/n" + result.toString());
+        if (result.hasErrors()) {
+            model.addAttribute("book", bookFromView);
+            model.addAttribute("errors", result);
+            model.addAttribute("message", true);
+            model.addAttribute("content", "Sended book has errors");
+
+        } else {
+            Book bookFromDB = bookDAO.update(book1);
+            bookFromView=new BookFromView();
+            bookFromView.setId(new Integer(id).toString() );
+            bookFromView.setName(bookFromDB.getName());
+            bookFromView.setIsbnOrIssn(bookFromDB.getName());
+            bookFromView.setDescription(bookFromDB.getDescription());
+            bookFromView.setYear(bookFromDB.getYear().toString());
+            bookFromView.setPublisherId(bookFromDB.getPublisher().getId().toString());
+            model.addAttribute("book", bookFromView);
+            model.addAttribute("message", true);
+            model.addAttribute("content", "Book has been edited");
+
+
+        }
+        return "book/bookform";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.DELETE)

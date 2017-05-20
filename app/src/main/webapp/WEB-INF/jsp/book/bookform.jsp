@@ -57,6 +57,14 @@
             text-align: right;
 
         }
+
+        .has-error {
+            border-color: aqua;
+        }
+
+        .help-inline {
+            color: red;
+        }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript" language="javascript">
@@ -84,11 +92,12 @@
                 cache: false,
                 success: function (result) {
                     $('#generic-container').html(result);
-                    $("input").prop('disabled', true);
+//                    $("input").prop('disabled', true);
                 }
             });
             e.preventDefault
-        };
+        }
+        ;
         function deletebook() {
             var id = $('#id').val();
             var name = $('#name').val();
@@ -117,7 +126,8 @@
                 }
             });
 
-        };
+        }
+        ;
         $(function () {
             $('#form_id').on('submit', updatebook);
         });
@@ -131,7 +141,7 @@
 <div id="generic-container">
     <div class="header">Book Form</div>
     <form:form id="form_id" modelAttribute="book" action="javascript:void(null);" class="form-horizontal">
-        <form:input type="hidden" path="id" id="id"/>
+    <form:input type="hidden" path="id" id="id"/>
 
     <div class="row">
         <div class="cell">
@@ -184,18 +194,18 @@
     <div class="row">
         <div class="cell">
             <label class="lable"
-                   for="publisher">Publisher: ${book.publisher.publisherName}, ${book.publisher.country} </label>
+                   for="publisher">Publisher</label>
             <div class="inp">
 
                 <p class="lable">If you are editing book, please select:</p>
-                <form:select path="publisher" id="publisher" class="form_input">
+                <form:select path="publisherId" id="publisher" class="form_input">
                     <c:forEach var="publisher" items="${publ}">
                         <form:option value="${publisher.id}"><c:out
                                 value="${publisher.publisherName}, ${publisher.country}"/></form:option>
                     </c:forEach>
                 </form:select>
                 <div class="has-error">
-                    <form:errors path="publisher" class="help-inline"/>
+                    <form:errors path="publisherId" class="help-inline"/>
                 </div>
                     <%--<form:select path="publisher" items="${publ}" multiple="true" itemValue="id"  itemLabel="publisherName" class="form input" />--%>
             </div>
@@ -223,6 +233,7 @@
             <p>&copyNepomnyachshaya L V, 2017</p>
         </div>
     </div>
+</div>
 
 </body>
 </html>
