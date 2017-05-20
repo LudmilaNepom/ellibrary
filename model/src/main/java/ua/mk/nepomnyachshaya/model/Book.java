@@ -1,7 +1,10 @@
 package ua.mk.nepomnyachshaya.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +17,11 @@ import java.util.List;
     @NamedQueries({@NamedQuery(name = "Book.getAll", query = "SELECT b from Book b"),
     })
 
-    public class Book extends Edition implements Reviewable {
+    public class Book extends Edition implements Reviewable, Serializable {
+
         @ManyToMany
         private List<Author> authors = new ArrayList<>();
+
         @NotNull
         @ManyToOne
         private Publisher publisher;

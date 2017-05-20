@@ -1,9 +1,12 @@
 package ua.mk.nepomnyachshaya.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  *
@@ -12,14 +15,17 @@ import javax.validation.constraints.Size;
 @Table(name = "Publisher", uniqueConstraints =
 @UniqueConstraint(columnNames = {"publisherName", "country"}))
 @NamedQuery(name = "Publisher.getAll", query = "SELECT p from Publisher p")
-public class Publisher {
+public class Publisher implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     @NotNull
     @Size(min = 1, max = 128)
     @Pattern(regexp = "^[0-9a-zA-Zа-яёА-ЯЁ\\s\\-\"]")
     private String publisherName;
+
     @NotNull
     @Size(min = 1, max = 128)
     private String country;

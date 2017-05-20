@@ -200,9 +200,9 @@
 
     <div class="row">
         <div class="cell">
-            <label class="lable" for="isbn">ISBN</label>
+            <label class="lable" for="isbnOrIssn">ISBN</label>
             <div class="inp">
-                <form:input type="text" path="isbn" id="isbn" class="form_input"/>
+                <form:input type="text" path="isbnOrIssn" id="isbnOrIssn" class="form_input"/>
             </div>
         </div>
     </div>
@@ -210,11 +210,11 @@
     <div class="row">
         <div class="cell">
             <label class="lable"
-                   for="publisher">Publisher </label>
+                   for="publisherId">Publisher </label>
             <div class="inp">
 
                 <p class="lable">select:</p>
-                <form:select path="publisher" id="publisher" class="form_input">
+                <form:select path="publisherId" id="publisherId" class="form_input">
                     <c:forEach var="publisher" items="${publ}">
                         <form:option value="${publisher.id}"><c:out
                                 value="${publisher.publisherName}, ${publisher.country}"/></form:option>

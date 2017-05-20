@@ -1,17 +1,25 @@
 package ua.mk.nepomnyachshaya.controllers.book;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.io.Serializable;
 
 /**
  * Created by User on 16.05.2017.
  */
 public class BookFromView implements Serializable{
+    @JsonView
     private String id;
+    @JsonView
     private String name;
+    @JsonView
     private String description;
-    private String isbn;
+    @JsonView
     private String year;
-    private String publisher;
+    @JsonView
+    private String isbnOrIssn;
+    @JsonView
+    private String publisherId;
 
     public String getId() {
         return id;
@@ -37,12 +45,12 @@ public class BookFromView implements Serializable{
         this.description = description;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getIsbnOrIssn() {
+        return isbnOrIssn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setIsbnOrIssn(String isbn) {
+        this.isbnOrIssn = isbn;
     }
 
     public String getYear() {
@@ -53,11 +61,23 @@ public class BookFromView implements Serializable{
         this.year = year;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getPublisherId() {
+        return publisherId;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setPublisherId(String publisherId) {
+        this.publisherId = publisherId;
+    }
+
+    @Override
+    public String toString() {
+        return "BookFromView{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", isbnOrIssn='" + isbnOrIssn + '\'' +
+                ", year='" + year + '\'' +
+                ", publisher='" + publisherId + '\'' +
+                '}';
     }
 }
