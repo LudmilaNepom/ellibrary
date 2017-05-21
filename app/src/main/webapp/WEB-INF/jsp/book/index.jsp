@@ -170,7 +170,7 @@
 </div>
 <div id="new_book_form" class="hidden">
     <div class="header">Book Form</div>
-    <form:form id="form_id" method="POST" modelAttribute="book" class="form-horizontal">
+    <form:form id="form_id" method="POST" modelAttribute="bookFromView" class="form-horizontal">
     <form:input type="hidden" path="id" id="id" value="0"/>
     <div class="row">
         <div class="cell">
