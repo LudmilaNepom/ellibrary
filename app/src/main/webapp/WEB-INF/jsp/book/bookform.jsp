@@ -141,6 +141,7 @@
 <div id="generic-container">
     <div class="header">Book Form</div>
     <form:form id="form_id" modelAttribute="book" action="javascript:void(null);" class="form-horizontal">
+    <form:errors path="*" cssClass="help-inline" element="div" />
     <form:input type="hidden" path="id" id="id"/>
 
     <div class="row">
