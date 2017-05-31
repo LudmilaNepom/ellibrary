@@ -9,9 +9,11 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="MyUser")
+@NamedQuery(name = "MyUser.getAll", query = "SELECT mu from MyUser mu")
 public class MyUser implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotEmpty
@@ -67,7 +69,7 @@ public class MyUser implements Serializable {
         if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null) return false;
         if (!getName().equals(user.getName())) return false;
         if (!getPassword().equals(user.getPassword())) return false;
-        return getUserRole() == user.getUserRole();
+        return getUserRole() .equals(user.getUserRole());
     }
 
     @Override
@@ -77,5 +79,15 @@ public class MyUser implements Serializable {
         result = 31 * result + getPassword().hashCode();
         result = 31 * result + (getUserRole() != null ? getUserRole().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "MyUser{" +
+
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", userRole='" + userRole + '\'' +
+                '}';
     }
 }

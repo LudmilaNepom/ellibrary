@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -50,7 +51,7 @@ public class BookController {
         modelAndView.addObject("content", "");
         return modelAndView;
     }
-
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ModelAndView saveNewBook(BookFromView bookFromClient) {
         Book book1 = new Book();
@@ -80,7 +81,7 @@ public class BookController {
         Publisher publisher = publisherDAO.getPublisherByBookId(id);
         book.setPublisher(publisher);
         BookFromView bookFromView=new BookFromView();
-        bookFromView.setId(new Integer(id).toString() );
+        bookFromView.setId(Integer.toString(id) );
         bookFromView.setName(book.getName());
         bookFromView.setIsbnOrIssn(book.getIsbnOrIssn());
         bookFromView.setDescription(book.getDescription());
@@ -92,6 +93,7 @@ public class BookController {
         modelAndView.addObject("content", "");
         return modelAndView;
     }
+    @Secured("ROLE_ADMIN")
     @JsonView
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.PUT, consumes = "application/json", produces = "text/html")
     public String updateBook(@RequestBody @Valid BookFromView bookFromView, BindingResult result, ModelMap model,
@@ -117,7 +119,7 @@ public class BookController {
         } else {
             Book bookFromDB = bookDAO.update(book1);
             bookFromView=new BookFromView();
-            bookFromView.setId(new Integer(id).toString() );
+            bookFromView.setId(Integer.toString(id) );
             bookFromView.setName(bookFromDB.getName());
             bookFromView.setIsbnOrIssn(bookFromDB.getName());
             bookFromView.setDescription(bookFromDB.getDescription());
@@ -131,7 +133,7 @@ public class BookController {
         }
         return "book/bookform";
     }
-
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.DELETE)
     public ModelAndView deleteBook(@RequestBody String json, @PathVariable Integer id) throws IOException {
         Map<String, String> myMap = new HashMap<String, String>();

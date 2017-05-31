@@ -25,7 +25,9 @@ public abstract class AbstractDAO<T> {
     @Transactional
     public T add(T object) {
 //        em.getTransaction().begin();
+        System.out.println("before merge");
         T objectFromDB = em.merge(object);
+        System.out.println("after merge");
 //        em.getTransaction().commit();
         return objectFromDB;
     }
