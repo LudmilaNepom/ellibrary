@@ -47,9 +47,9 @@ public class BookController {
             Publisher publisher = publisherDAO.getPublisherByBookId(book.getId());
             book.setPublisher(publisher);
         }
-        BookFromView book = new BookFromView();
+        BookFromView bookFromView = new BookFromView();
         modelAndView.addObject("books", books);
-        modelAndView.addObject("book", book);
+        modelAndView.addObject("bookFromView", bookFromView);
         modelAndView.addObject("message", false);
         modelAndView.addObject("content", "");
         return modelAndView;
@@ -70,9 +70,9 @@ public class BookController {
             Publisher publisher = publisherDAO.getPublisherByBookId(book.getId());
             book.setPublisher(publisher);
         }
-        BookFromView book = new BookFromView();
+        BookFromView bookFromView = new BookFromView();
         modelAndView.addObject("books", books);
-        modelAndView.addObject("book", book);
+        modelAndView.addObject("bookFromView", bookFromView);
         modelAndView.addObject("message", true);
         modelAndView.addObject("content", "Created:" + bookFromDB.toString());
         return modelAndView;
@@ -91,7 +91,7 @@ public class BookController {
         bookFromView.setYear(book.getYear().toString());
         bookFromView.setPublisherId(book.getPublisher().getId().toString());
         ModelAndView modelAndView = new ModelAndView("book/bookform");
-        modelAndView.addObject("book", bookFromView);
+        modelAndView.addObject("bookFromView", bookFromView);
         modelAndView.addObject("message", false);
         modelAndView.addObject("content", "");
         return modelAndView;
@@ -114,7 +114,7 @@ public class BookController {
 //        ModelAndView modelAndView = new ModelAndView("book/bookform");
         System.out.println(book1.toString() + "/n" + result.toString());
         if (result.hasErrors()) {
-            model.addAttribute("book", bookFromView);
+            model.addAttribute("bookFromView", bookFromView);
             model.addAttribute("errors", result);
             model.addAttribute("message", true);
             model.addAttribute("content", "Sended book has errors");
@@ -128,7 +128,7 @@ public class BookController {
             bookFromView.setDescription(bookFromDB.getDescription());
             bookFromView.setYear(bookFromDB.getYear().toString());
             bookFromView.setPublisherId(bookFromDB.getPublisher().getId().toString());
-            model.addAttribute("book", bookFromView);
+            model.addAttribute("bookFromView", bookFromView);
             model.addAttribute("message", true);
             model.addAttribute("content", "Book has been edited");
 
