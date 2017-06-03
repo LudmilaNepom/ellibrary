@@ -244,6 +244,7 @@
 </div>
 <div class="footer">
     <%--<p><a href="<c:url value='/'/>">HOME</a> </p>--%>
+
     <p><a href="${pageContext.request.contextPath}/">HOME</a></p>
     <p>&copyNepomnyachshaya L V, 2017</p>
 </div>

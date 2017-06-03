@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,8 @@ import java.util.Map;
 @EnableWebMvc
 @Controller
 @RequestMapping(value = "/book")
+
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class BookController {
     @Autowired
     private BookDAO bookDAO;

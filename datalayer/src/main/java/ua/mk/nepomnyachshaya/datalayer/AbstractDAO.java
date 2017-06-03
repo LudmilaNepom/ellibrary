@@ -24,19 +24,17 @@ public abstract class AbstractDAO<T> {
 
     @Transactional
     public T add(T object) {
-//        em.getTransaction().begin();
-        System.out.println("before merge");
         T objectFromDB = em.merge(object);
-        System.out.println("after merge");
-//        em.getTransaction().commit();
         return objectFromDB;
     }
+
     @Transactional
     public void delete(int Id) {
 //        em.getTransaction().begin();
         em.remove(get(Id));
 //        em.getTransaction().commit();
     }
+
     @Transactional
     public T update(T b) {
 //        em.getTransaction().begin();
@@ -44,6 +42,7 @@ public abstract class AbstractDAO<T> {
 //        em.getTransaction().commit();
         return b;
     }
+
     @Transactional(readOnly = true)
     public T get(int Id) {
         return em.find(type, Id);

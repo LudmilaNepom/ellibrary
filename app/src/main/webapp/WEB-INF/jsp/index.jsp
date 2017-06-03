@@ -58,6 +58,7 @@
 
     </div>
     <div class="footer">
+        <p><a href="${pageContext.request.contextPath}/logout">logout</a></p>
         <p>&copyNepomnyachshaya L V, 2017</p>
     </div>
 </div>

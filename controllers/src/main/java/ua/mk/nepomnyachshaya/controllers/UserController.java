@@ -2,7 +2,6 @@ package ua.mk.nepomnyachshaya.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,14 +26,17 @@ import java.util.Locale;
 
 @Controller
 public class UserController {
-    @Autowired
-    AuthenticationTrustResolver authenticationTrustResolver;
+//    @Autowired
+//    AuthenticationTrustResolver authenticationTrustResolver;
 
     @Autowired
     UserDAO userDAO;
 
     @Autowired
     MessageSource messageSource;
+
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -78,10 +80,10 @@ public class UserController {
         System.out.println(myUser.toString());
 
         if (result.hasErrors()) {
-            System.out.println("I Am HERE1");
+
             return "registration";
         }
-        System.out.println("I Am HERE2");
+
         /*
          * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation
          * and applying it on field [sso] of Model class [User].
@@ -92,15 +94,14 @@ public class UserController {
          */
         myUser.setId(null);
         if(!userDAO.isUserNameUnique(myUser.getId(), myUser.getName())){
-            System.out.println("I Am HERE3");
+
             FieldError nameError =new FieldError("myUser","name",
                     messageSource.getMessage("non.unique.name", new String[]{myUser.getName()}, Locale.getDefault()));
             result.addError(nameError);
             return "registration";
         }
 
-        System.out.println("I Am HERE4");
-        userDAO.add(myUser);
+       userDAO.add(myUser);
 
         model.addAttribute("success", "User " + myUser.getName() + " registered successfully");
         model.addAttribute("loggedinuser", getPrincipal());
@@ -164,11 +165,7 @@ public class UserController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        if (isCurrentAuthenticationAnonymous()) {
             return "login";
-        } else {
-            return "redirect:/index";
-        }
     }
 
     /**
@@ -180,7 +177,6 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
-//            persistentTokenBasedRememberMeServices.logout(request, response, auth);
             SecurityContextHolder.getContext().setAuthentication(null);
         }
         return "redirect:/login?logout";
@@ -191,7 +187,7 @@ public class UserController {
      */
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
-//        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", getPrincipal());
         return "accessDenied";
     }
 
@@ -199,7 +195,7 @@ public class UserController {
      * This method returns the principal[user-name] of logged-in user.
      */
     private String getPrincipal(){
-        String userName = null;
+        String userName;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof UserDetails) {
@@ -213,10 +209,10 @@ public class UserController {
     /**
      * This method returns true if users is already authenticated [logged-in], else false.
      */
-    private boolean isCurrentAuthenticationAnonymous() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authenticationTrustResolver.isAnonymous(authentication);
-    }
+//    private boolean isCurrentAuthenticationAnonymous() {
+//        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        return authenticationTrustResolver.isAnonymous(authentication);
+//    }
 
 
 }

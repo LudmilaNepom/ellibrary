@@ -25,6 +25,7 @@ public class BookFromView implements Serializable{
     @JsonView
     @Max(2017)
     @Min(1900)
+    @Pattern(regexp = "^[0-9]+$")
     private String year;
     @JsonView
     @Size(max=34, min =10)

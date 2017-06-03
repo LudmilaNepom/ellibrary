@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <!-- Latest compiled and minified CSS -->
@@ -13,10 +14,11 @@
 </head>
 <body>
 <c:url value="/login" var="loginUrl"/>
-<form action="${loginUrl}" method="post">
+<form:form action="${loginUrl}" method="POST">
     <c:if test="${param.error != null}">
         <p>
             Invalid username and password.
+                ${param.error.toString()}
         </p>
     </c:if>
     <c:if test="${param.logout != null}">
@@ -32,10 +34,8 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password"/>
     </p>
-    <%--<input type="hidden"                        6--%>
-           <%--name="${_csrf.parameterName}"--%>
-           <%--value="${_csrf.token}"/>--%>
+
     <button type="submit" class="btn">Log in</button>
-</form>
+</form:form>
 </body>
 </html>

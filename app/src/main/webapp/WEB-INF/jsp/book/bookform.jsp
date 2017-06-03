@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
+
     <style type="text/css">
         #generic-container {
             width: 600px;
