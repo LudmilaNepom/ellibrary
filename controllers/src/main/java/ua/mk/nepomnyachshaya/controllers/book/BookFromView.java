@@ -8,9 +8,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-/**
- * Created by User on 16.05.2017.
- */
 public class BookFromView implements Serializable{
     @JsonView
     private String id;
@@ -84,13 +81,12 @@ public class BookFromView implements Serializable{
 
     @Override
     public String toString() {
-        return "BookFromView{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", isbnOrIssn='" + isbnOrIssn + '\'' +
-                ", year='" + year + '\'' +
-                ", publisher='" + publisherId + '\'' +
-                '}';
+        return "Book:" +
+                "id - " + id +
+                ", name - " + name +
+                ", description - " + description +
+                ", isbnOrIssn - " + isbnOrIssn +
+                ", year - " + year +
+                ", publisher - " + publisherId + ".";
     }
 }

@@ -89,9 +89,8 @@ import java.util.List;
     @Override
     public String toString() {
         return super.toString()+
-                "authors " + Arrays.toString(authors.toArray()) +
+                ", authors " + Arrays.toString(authors.toArray()) +
                 ", publisher " + publisher.getPublisherName() +
-                ", series " + series +
-                '}';
+                ", series " + series;
     }
 }

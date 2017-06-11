@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-
+    <mvc:resources mapping="/static/**" location="/static/" />
     <context:component-scan base-package="ua.mk.nepomnyachshaya"/>
     <import resource="classpath:dataBaseContext.xml"/>
     <bean id="viewResolver"
@@ -32,5 +32,13 @@
             <value>messages</value>
         </property>
     </bean>
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+    <property name="defaultLocale">
+        <value>en</value>
+    </property>
+    </bean>
+
+
 
 </beans>

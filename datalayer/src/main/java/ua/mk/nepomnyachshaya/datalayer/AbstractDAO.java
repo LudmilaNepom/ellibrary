@@ -14,7 +14,6 @@ import java.util.List;
 public abstract class AbstractDAO<T> {
 
     @PersistenceContext
-//            (type = PersistenceContextType.EXTENDED)
     protected EntityManager em;
     private Class<T> type;
 
@@ -30,16 +29,12 @@ public abstract class AbstractDAO<T> {
 
     @Transactional
     public void delete(int Id) {
-//        em.getTransaction().begin();
         em.remove(get(Id));
-//        em.getTransaction().commit();
     }
 
     @Transactional
     public T update(T b) {
-//        em.getTransaction().begin();
         em.merge(b);
-//        em.getTransaction().commit();
         return b;
     }
 

@@ -9,14 +9,16 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="MyUser")
-@NamedQuery(name = "MyUser.getAll", query = "SELECT mu from MyUser mu")
+@NamedQueries ({@NamedQuery(name = "MyUser.getAll", query = "SELECT mu from MyUser mu"),
+@NamedQuery(name = "MyUser.getByName", query = "SELECT mu from MyUser mu where mu.name=:name")
+        })
 public class MyUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotEmpty
+
     @Column(name="name", unique=true, nullable=false)
     private String name;
 

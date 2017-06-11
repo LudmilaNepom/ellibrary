@@ -10,5 +10,5 @@ public interface UserDAO {
     MyUser get(int Id);
     List<MyUser> getAll();
     MyUser findByUserName (String name);
-    boolean isUserNameUnique(Integer id, String name);
+    boolean isUserNameUnique(String name);
 }

@@ -93,7 +93,7 @@ public class UserController {
          *
          */
         myUser.setId(null);
-        if(!userDAO.isUserNameUnique(myUser.getId(), myUser.getName())){
+        if(!userDAO.isUserNameUnique(myUser.getName())){
 
             FieldError nameError =new FieldError("myUser","name",
                     messageSource.getMessage("non.unique.name", new String[]{myUser.getName()}, Locale.getDefault()));

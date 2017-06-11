@@ -1,5 +1,6 @@
 package ua.mk.nepomnyachshaya.app;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,14 +16,14 @@ import java.util.List;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
-    private final UserDAO userDAO;
-    public MyUserDetailsService(UserDAO userDAO) {
-        this.userDAO=userDAO;
-    }
+    @Autowired
+    UserDAO userDAO;
+
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        MyUser myUser = userDAO.findByUserName(username);
+        MyUser myUser;
+        myUser =  userDAO.findByUserName(username);
         if (myUser != null) {
             List<GrantedAuthority> authorities =
                     new ArrayList<>();
@@ -30,6 +31,10 @@ public class MyUserDetailsService implements UserDetailsService {
             return new User(
                     myUser.getName(),
                     myUser.getPassword(),
+                    true,
+                    true,
+                    true,
+                    true,
                     authorities);
         }
 

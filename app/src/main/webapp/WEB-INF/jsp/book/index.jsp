@@ -1,252 +1,281 @@
+<%@ page language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <style type="text/css">
-        #box {
-            width: 1350px;
-            display: block;
-            margin: 20px auto 0 auto;
-        }
 
-        .title {
-            width: 100%;
-            color: steelblue;
-            border: 1px solid transparent;
-            text-align: center;
-        }
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        .inner_box_th {
-            width: 148px;
-            color: steelblue;
-            float: left;
-            border: 1px solid #000000;
-            text-align: center;
-        }
+<title>Welcome to Ellibrary</title>
 
-        .inner_box {
-            width: 148px;
-            height: 90px;
-            float: left;
-            border: 1px solid #000000;
-            text-align: center;
-        }
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous">
 
-        .text {
-            text-align: center;
-        }
 
-        .hidden {
-            display: none;
-            width: 600px;
-            margin: 20px auto 0 auto;
-        }
+<link href="${pageContext.request.contextPath}/static/app.css" rel="stylesheet">
 
-        .active {
-            width: 600px;
-            margin: 20px auto 0 auto;
 
-        }
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
-        .row {
-            width: 100%;
-            color: steelblue;
-            float: left;
-            border: 1px solid #000000;
-            text-align: center;
-        }
+</head>
 
-        .cell {
-            margin: 5%;
-            border: 1px solid aqua;
-            text-align: center;
-        }
+<body>
 
-        .inp {
-            color: azure;
-            width: 80%;
-            text-align: center;
-        }
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Ellibrary</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="${pageContext.request.contextPath}/book/">Books</a></li>
+                <li><a href="${pageContext.request.contextPath}/author/">Authors</a></li>
+                <li><a href="${pageContext.request.contextPath}/publisher/">Publishers</a></li>
+                <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+                <li><a href="${pageContext.request.contextPath}/logout/">Logout</a></li>
+            </ul>
 
-        .form_input {
-            background-color: bisque;
-            width: 70%;
-            text-align: center;
-            align-self: center;
-        }
+        </div>
+    </div>
+</nav>
 
-        .lable {
-            color: midnightblue;
-            text-align: left;
-        }
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="bg-info"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="${pageContext.request.contextPath}/book/">Books</a></li>
+                <li><a href="${pageContext.request.contextPath}/author/">Authors</a></li>
+                <li><a href="${pageContext.request.contextPath}/publisher/">Publishers</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="${pageContext.request.contextPath}/logout/">Logout</a></li>
+            </ul>
 
-        .footer {
-            position: relative;
-            bottom: 10%;
-            width: 95%;
-            float: left;
-            text-align: right;
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-        }
-    </style>
+            <h2 class="sub-header">Books</h2>
+            <table class="table table-striped">
+                <thead>
+                <th>id</th>
+                <th>name</th>
+                <th>description</th>
+                <th>year</th>
+                <th>isbnOrIssn</th>
+                <th>authors</th>
+                <th>publisher</th>
+                <th>works</th>
+                <th>reviews</th>
+                <th>edit/delete</th>
+                </thead>
+                <tbody>
+                <c:forEach items="${books}" var="book">
+                    <tr>
+                        <th>
+                                ${book.id}
+                        </th>
+                        <th>
+                                ${book.name}
+                        </th>
+                        <th>
+                                ${book.description}
+                        </th>
+                        <th>
+                                ${book.year}
+                        </th>
+                        <th>
+                                ${book.isbnOrIssn}
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+                                ${book.publisher.publisherName}, ${book.publisher.country}
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+                            <a href="${pageContext.request.contextPath}/book/${book.id}">edit/delete</a>
+                        </th>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            <div class="inner_box">
+                <p><input id="create_new_book" type="button" value="NEWBOOK" class="btn"/></p>
+            </div>
+            <div id="new_book_form" class="hidden">
+
+                <div class="bg-info">
+                    <h3>Book Form</h3>
+                </div>
+                <form:form id="form_id" method="POST" action="javascript:void(null);" modelAttribute="bookFromView"
+                           class="form-horizontal">
+                    <form:input type="hidden" path="id" id="id" value="0"/>
+                    <div class="form-group">
+
+                        <label class="col-sm-2 control-label" for="name">Name</label>
+                        <div class="col-sm-10">
+                            <form:input type="text" path="name" id="name" class="form-control"/>
+                            <form:errors path="name" class="help-inline text-danger"/>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-sm-2 control-label" for="description">Description</label>
+                        <div class="col-sm-10">
+                            <form:input type="text" path="description" id="description" class="form-control"/>
+                            <form:errors path="description" class="help-inline text-danger"/>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-sm-2 control-label" for="year">Year</label>
+                        <div class="col-sm-10">
+                            <form:input type="text" path="year" id="year" class="form-control"/>
+                            <form:errors path="year" class="help-inline text-danger"/>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-sm-2 control-label" for="isbnOrIssn">ISBN</label>
+                        <div class="col-sm-10">
+                            <form:input type="text" path="isbnOrIssn" id="isbnOrIssn" class="form-control"/>
+                            <form:errors path="isbnOrIssn" class="help-inline text-danger"/>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-sm-2 control-label"
+                               for="publisherId">Publisher </label>
+                        <div class="col-sm-10">
+
+                                <%--<div class="input-group">--%>
+                            <h4><span class="glyphicon glyphicon-check"></span> select:</h4>
+                            <form:select path="publisherId" id="publisher" class="form-control">
+                                <c:forEach var="publisher" items="${publ}">
+
+                                    <form:option value="${publisher.id}">
+                                        <c:out value="${publisher.publisherName}, ${publisher.country}"/>
+                                    </form:option>
+                                </c:forEach>
+                            </form:select>
+                            <form:errors path="publisherId" class="help-inline text-danger"/>
+                                <%--</div>--%>
+
+
+                                <%--<form:select path="publisher" items="${publ}" multiple="true" itemValue="id"  itemLabel="publisherName" class="form input" />--%>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <input id="create_new" type="submit" value="CREATE NEW BOOK" class="btn btn-primary"/>
+
+
+                    </div>
+                </form:form>
+            </div>
+            <div id="message">
+                <c:choose>
+                    <c:when test="${message}">
+                        <h3> ${content} </h3>
+                    </c:when>
+                </c:choose>
+            </div>
+            <div class="footer pull-right">
+                <p>&copyNepomnyachshaya L V, 2017</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/static/holder.js"></script>
     <script>
-        function show() {
-            $('#new_book_form').removeClass('hidden').addClass('active');
+    function show() {
+    $('#new_book_form').removeClass('hidden').addClass('active');
+    }
+    $(function () {
+    $('#create_new_book').on('click', show);
+    });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function savebook(e) {
+            var id = $('#id').val();
+            var name = $('#name').val();
+            var description = $('#description').val();
+            var year = $('#year').val();
+            var isbnOrIssn = $('#isbnOrIssn').val();
+            var publisherId = $('#publisher').val();
+            var json = {
+                "id": id,
+                "name": name,
+                "description": description,
+                "year": year,
+                "isbnOrIssn": isbnOrIssn,
+                "publisherId": publisherId
+            };
+            var url = "${pageContext.request.contextPath}/book/";
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(json),
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                success: function (result) {
+                    $('body').html(result);
+                    $('#new_book_form').removeClass('hidden').addClass('active');
+                }
+            });
+            e.preventDefault
         }
+        ;
         $(function () {
-            $('#create_new_book').on('click', show);
+            $('#form_id').on('submit', savebook);
         });
     </script>
-</head>
-<body>
-<div class="title">
-    <h2>Books</h2>
-</div>
-<div id="box">
-    <div class="inner_box_th">
-        <p class="text">name</p>
-    </div>
-    <div class="inner_box_th">
-        <p class="text">description</p>
-    </div>
-    <div class="inner_box_th">
-        <p class="text">year</p>
-    </div>
-    <div class="inner_box_th">
-        <p class="text">isbnOrIssn</p>
-    </div>
-    <div class="inner_box_th">
-        <p class="text">authors</p>
-    </div>
-    <div class="inner_box_th">
-        <p class="text">publisher</p>
-    </div>
-    <div class="inner_box_th">
-        <p class="text">works</p>
-    </div>
-    <div class="inner_box_th">
-        <p class="text">reviews</p>
-    </div>
-    <div class="inner_box_th">
-        <p class="text">view details/edit/delete</p>
-    </div>
-
-    <c:forEach items="${books}" var="book">
-        <div class="inner_box">
-            <p class="text">${book.name}</p>
-        </div>
-        <div class="inner_box">
-            <p class="text">${book.description}</p>
-        </div>
-        <div class="inner_box">
-            <p class="text">${book.year}</p>
-        </div>
-        <div class="inner_box">
-            <p class="text">${book.isbnOrIssn}</p>
-        </div>
-        <div class="inner_box">
-            <p class="text"></p>
-        </div>
-        <div class="inner_box">
-            <p class="text">${book.publisher.publisherName}, ${book.publisher.country}</p>
-        </div>
-        <div class="inner_box">
-            <p class="text"></p>
-        </div>
-        <div class="inner_box">
-            <p class="text"></p>
-        </div>
-        <div class="inner_box">
-            <p class="text"><a href="${pageContext.request.contextPath}/book/${book.id}">go to the book's page</a></p>
-        </div>
-
-
-    </c:forEach>
-    <div class="inner_box">
-        <p><input id="create_new_book" type="button" value="NEWBOOK" class="btn"/></p>
-    </div>
-</div>
-<div id="new_book_form" class="hidden">
-    <div class="header">Book Form</div>
-    <form:form id="form_id" method="POST" modelAttribute="bookFromView" class="form-horizontal">
-    <form:input type="hidden" path="id" id="id" value="0"/>
-    <div class="row">
-        <div class="cell">
-            <label class="lable" for="name">Name</label>
-            <div class="inp">
-                <form:input type="text" path="name" id="name" class="form_input"/>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="cell">
-            <label class="lable" for="description">Description</label>
-            <div class="inp">
-                <form:input type="text" path="description" id="description" class="form_input"/>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="cell">
-            <label class="lable" for="year">Year</label>
-            <div class="inp">
-                <form:input type="text" path="year" id="year" class="form_input"/>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="cell">
-            <label class="lable" for="isbnOrIssn">ISBN</label>
-            <div class="inp">
-                <form:input type="text" path="isbnOrIssn" id="isbnOrIssn" class="form_input"/>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="cell">
-            <label class="lable"
-                   for="publisherId">Publisher </label>
-            <div class="inp">
-
-                <p class="lable">select:</p>
-                <form:select path="publisherId" id="publisherId" class="form_input">
-                    <c:forEach var="publisher" items="${publ}">
-                        <form:option value="${publisher.id}"><c:out
-                                value="${publisher.publisherName}, ${publisher.country}"/></form:option>
-                    </c:forEach>
-                </form:select>
-                    <%--<form:select path="publisher" items="${publ}" multiple="true" itemValue="id"  itemLabel="publisherName" class="form input" />--%>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="cell">
-            <div><p><input id="create_new" type="submit" value="CREATE NEW BOOK" class="btn"/></p></div>
-        </div>
-
-
-    </form:form>
-    </div>
-
-</div>
-<div id="message">
-    <c:choose>
-        <c:when test="${message}">
-            <h3> ${content} </h3>
-        </c:when>
-    </c:choose>
-</div>
-<div class="footer">
-    <%--<p><a href="<c:url value='/'/>">HOME</a> </p>--%>
-
-    <p><a href="${pageContext.request.contextPath}/">HOME</a></p>
-    <p>&copyNepomnyachshaya L V, 2017</p>
 </div>
 </body>
 </html>
+
+
