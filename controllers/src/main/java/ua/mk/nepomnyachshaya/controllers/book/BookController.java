@@ -3,6 +3,8 @@ package ua.mk.nepomnyachshaya.controllers.book;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
@@ -13,11 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ua.mk.nepomnyachshaya.datalayer.book.BookDAO;
 import ua.mk.nepomnyachshaya.datalayer.publisher.PublisherDAO;
+import ua.mk.nepomnyachshaya.datalayer.review.ReviewDAO;
 import ua.mk.nepomnyachshaya.model.Book;
 import ua.mk.nepomnyachshaya.model.Publisher;
+import ua.mk.nepomnyachshaya.model.Review;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +41,8 @@ public class BookController {
     private BookDAO bookDAO;
     @Autowired
     private PublisherDAO publisherDAO;
+    @Autowired
+    private ReviewDAO reviewDAO;
     @Autowired
     MessageSource messageSource;
 
@@ -78,7 +86,7 @@ public class BookController {
             book.setYear(Integer.parseInt(bookFromView.getYear()));
             book.setIsbnOrIssn(bookFromView.getIsbnOrIssn());
             book.setPublisher(publisherDAO.get(Integer.parseInt(bookFromView.getPublisherId())));
-            Book bookFromDB=bookDAO.add(book);
+            Book bookFromDB = bookDAO.add(book);
             List<Book> books = bookDAO.getAll();
             for (Book book1 : books) {
                 Publisher publisher = publisherDAO.getPublisherByBookId(book1.getId());
@@ -112,6 +120,36 @@ public class BookController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "view/{id}", method = RequestMethod.GET)
+    public ModelAndView viewBook(@PathVariable Integer id) {
+        Book book = bookDAO.get(id);
+        Double rating = bookDAO.getRating(book);
+        Publisher publisher = publisherDAO.getPublisherByBookId(id);
+        book.setPublisher(publisher);
+        BookFromView bookFromView = new BookFromView();
+        bookFromView.setId(Integer.toString(id));
+        bookFromView.setName(book.getName());
+        bookFromView.setIsbnOrIssn(book.getIsbnOrIssn());
+        bookFromView.setDescription(book.getDescription());
+        bookFromView.setYear(book.getYear().toString());
+        bookFromView.setPublisherId(book.getPublisher().getId().toString());
+        ModelAndView modelAndView = new ModelAndView("book/viewbook");
+        modelAndView.addObject("bookFromView", bookFromView);
+        modelAndView.addObject("book", book);
+        modelAndView.addObject("rating", rating);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/{id}/vote", method = RequestMethod.POST)
+    public ResponseEntity<?> voteForBook(@PathVariable Integer id, @RequestParam(name = "rating") String rating, HttpServletRequest request) {
+        Book book = bookDAO.get(id);
+        String ip = request.getRemoteAddr();
+        Instant date = Instant.now();
+        System.out.println("Book " + book + "date = " + date.toEpochMilli() + "rating " + rating);
+        Review review = new Review(book, date.toEpochMilli(), ip, Double.parseDouble(rating));
+        reviewDAO.add(review);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     @Secured("ROLE_ADMIN")
     @JsonView
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.PUT, consumes = "application/json", produces = "text/html;charset=UTF-8")
@@ -141,10 +179,9 @@ public class BookController {
     }
 
     @Secured("ROLE_ADMIN")
-    @JsonView
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.DELETE)
     public String deleteBook(@RequestBody BookFromView bookFromView, @PathVariable Integer id,
-                                   ModelMap model) throws IOException {
+                             ModelMap model) throws IOException {
         Map<String, String> myMap = new HashMap<String, String>();
         String content;
         try {
@@ -153,8 +190,8 @@ public class BookController {
         } catch (Exception e) {
             content = "Book with such id does not exist";
             model.addAttribute("bookFromView", bookFromView)
-                .addAttribute("message", true)
-                .addAttribute("content", content);
+                    .addAttribute("message", true)
+                    .addAttribute("content", content);
             return "book/bookform";
         }
         content = "This book has been deleted";

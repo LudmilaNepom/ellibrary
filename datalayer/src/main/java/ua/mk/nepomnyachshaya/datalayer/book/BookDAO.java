@@ -16,4 +16,5 @@ public interface BookDAO {
      List<Book> getBooksByName(String nameOfBook);
      List<Book> getBooksByAuthorSurname(String surnameOfAuthor);
      List<Book> getBooksByCategoryName(String nameOfCategory);
+     Double getRating (Book book);
 }

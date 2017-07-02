@@ -26,7 +26,7 @@ import java.util.List;
         @ManyToOne
         private Publisher publisher;
         private boolean series;
-
+        private float rating;
 
     public Book() {
     }
@@ -45,6 +45,18 @@ import java.util.List;
 
     public List<Author> getAuthors() {
         return authors;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public void addVote(float rating) {
+        this.rating = rating;
     }
 
     public void setPublisher(Publisher publisher) {
@@ -89,8 +101,8 @@ import java.util.List;
     @Override
     public String toString() {
         return super.toString()+
-                ", authors " + Arrays.toString(authors.toArray()) +
-                ", publisher " + publisher.getPublisherName() +
-                ", series " + series;
+//                ", authors " + Arrays.toString(authors.toArray()) +
+                ", publisher " + publisher.getPublisherName();
+//                ", series " + series;
     }
 }

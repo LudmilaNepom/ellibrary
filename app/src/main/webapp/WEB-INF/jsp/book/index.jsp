@@ -77,7 +77,7 @@
             <h2 class="sub-header">Books</h2>
             <table class="table table-striped">
                 <thead>
-                <th>id</th>
+                <th>view/vote</th>
                 <th>name</th>
                 <th>description</th>
                 <th>year</th>
@@ -92,7 +92,8 @@
                 <c:forEach items="${books}" var="book">
                     <tr>
                         <th>
-                                ${book.id}
+                            <a href="${pageContext.request.contextPath}/book/view/${book.id}">${book.id}</a>
+
                         </th>
                         <th>
                                 ${book.name}
@@ -116,7 +117,7 @@
 
                         </th>
                         <th>
-
+                            <input type="hidden" class="rating" data-fractions="2" value="${book.rating} data-readonly"/>
                         </th>
                         <th>
                             <a href="${pageContext.request.contextPath}/book/${book.id}">edit/delete</a>

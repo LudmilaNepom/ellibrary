@@ -18,23 +18,20 @@ public class Review {
     @Transient
     private Reviewable criticizedOb;
     @Column
-    @Temporal(TemporalType.DATE)
-    private Date dateOfReview;
+    private long dateOfReview;
     @Column
-    private String authorOfReview;
+    private String ip;
     @Column
-    private String comments;
-    @Column
-    private Integer rating;
+    private Double rating;
 
     public Review() {
     }
 
-    public Review(Reviewable criticizedOb, Date dateOfReview, String authorOfReview, int rating) {
-        this.criticizedOb=criticizedOb;
-        this.criticizedObject =new ReviewableForDB(criticizedOb);
+    public Review(Reviewable criticizedOb, long dateOfReview, String ip, Double rating) {
+        this.criticizedOb = criticizedOb;
+        this.criticizedObject = new ReviewableForDB(criticizedOb);
         this.dateOfReview = dateOfReview;
-        this.authorOfReview = authorOfReview;
+        this.ip = ip;
         this.rating = rating;
     }
 
@@ -46,17 +43,9 @@ public class Review {
         this.id = id;
     }
 
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
-
     public void setCriticizedОb(Reviewable criticizedОb) {
-        this.criticizedOb =criticizedОb;
-        this.criticizedObject=new ReviewableForDB(criticizedОb);
+        this.criticizedOb = criticizedОb;
+        this.criticizedObject = new ReviewableForDB(criticizedОb);
     }
 
     public Reviewable getCriticizedОb() {
@@ -71,67 +60,53 @@ public class Review {
         this.criticizedObject = criticizedObject;
     }
 
-    public void setDateOfReview(Date dateOfReview) {
+    public void setDateOfReview(long dateOfReview) {
         this.dateOfReview = dateOfReview;
     }
 
-    public Date getDateOfReview() {
+    public long getDateOfReview() {
         return dateOfReview;
     }
 
-    public void setAuthorOfReview(String authorOfReview) {
-        this.authorOfReview = authorOfReview;
+    public String getIp() {
+        return ip;
     }
 
-    public String getAuthorOfReview() {
-        return authorOfReview;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setRating(int rating) {
-        if (rating < 11 && rating > 0) {
+    public void setRating(Double rating) {
+        if (rating < 6 && rating > 0) {
             this.rating = rating;
-        } else this.rating = null;
+        } else this.rating = 0d;
     }
 
-    public Integer getRatings() {
+    public Double getRating() {
         return rating;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Review)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Review review = (Review) o;
 
-        if (getId() != review.getId()) return false;
-        if (criticizedOb != null ? !criticizedOb.equals(review.criticizedOb) : review.criticizedOb != null)
-            return false;
-        if (getDateOfReview() != null ? !getDateOfReview().equals(review.getDateOfReview()) : review.getDateOfReview() != null)
-            return false;
-        if (getAuthorOfReview() != null ? !getAuthorOfReview().equals(review.getAuthorOfReview()) : review.getAuthorOfReview() != null)
-            return false;
-        if (getComments() != null ? !getComments().equals(review.getComments()) : review.getComments() != null)
-            return false;
-        return getRating() != null ? getRating().equals(review.getRating()) : review.getRating() == null;
-
+        if (getDateOfReview() != review.getDateOfReview()) return false;
+        if (Double.compare(review.getRating(), getRating()) != 0) return false;
+        if (!getId().equals(review.getId())) return false;
+        if (!criticizedOb.equals(review.criticizedOb)) return false;
+        return getIp().equals(review.getIp());
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getCriticizedObject() != null ? getCriticizedObject().hashCode() : 0);
         result = 31 * result + (criticizedOb != null ? criticizedOb.hashCode() : 0);
-        result = 31 * result + (getDateOfReview() != null ? getDateOfReview().hashCode() : 0);
-        result = 31 * result + (getAuthorOfReview() != null ? getAuthorOfReview().hashCode() : 0);
-        result = 31 * result + (getComments() != null ? getComments().hashCode() : 0);
+        result = 31 * result + (int) (getDateOfReview() ^ (getDateOfReview() >>> 32));
+        result = 31 * result + (getIp() != null ? getIp().hashCode() : 0);
         result = 31 * result + (getRating() != null ? getRating().hashCode() : 0);
         return result;
     }
@@ -141,8 +116,6 @@ public class Review {
         return "Review{" +
                 "criticizedОbject=" + criticizedObject.getaClass() +
                 ", dateOfReview=" + dateOfReview +
-                ", authorOfReview='" + authorOfReview + '\'' +
-                ", comments='" + comments + '\'' +
                 ", rating=" + rating +
                 '}';
     }

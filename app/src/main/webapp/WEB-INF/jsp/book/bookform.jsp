@@ -17,6 +17,7 @@
 
 
 <link href="${pageContext.request.contextPath}/static/app.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/static/bootstrap-rating-master/bootstrap-rating.css" rel="stylesheet">
 
 <style>
     .glyphicon.glyphicon-book {
@@ -72,8 +73,6 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
             <h1 class="page-header bg-info">Book Form</h1>
-
-
             <form:form id="form_id" modelAttribute="bookFromView" action="javascript:void(null);"
                        class="form-horizontal">
             <form:input type="hidden" path="id" id="id"/>
@@ -85,17 +84,12 @@
                     <form:input type="text" path="name" id="name" class="form-control"/>
                         <form:errors path="name" class="help-inline text-danger"/>
                 </div>
-
-
             </div>
-
             <div class="form-group">
-
                 <label class="col-sm-2 control-label" for="description">Description</label>
                 <div class="col-sm-10">
                     <form:input type="text" path="description" id="description" class="form-control"/>
                         <form:errors path="description" class="help-inline text-danger"/>
-
                 </div>
 
             </div>
@@ -152,6 +146,9 @@
             </div>
                     </form:form>
 
+
+
+
             <div id="message">
                 <c:choose>
                     <c:when test="${message}">
@@ -175,7 +172,12 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
                 crossorigin="anonymous"></script>
         <script src="${pageContext.request.contextPath}/static/holder.js"></script>
+        <script src="${pageContext.request.contextPath}/static/bootstrap-rating-master/bootstrap-rating.js"></script>
         <script type="text/javascript" language="javascript">
+            $('input').on('change', function () {
+                alert('You set raiting: ' + $(this).val());
+                $().post
+            });
             function updatebook(e) {
                 var id = $('#id').val();
                 var name = $('#name').val();
